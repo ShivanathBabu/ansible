@@ -1,6 +1,7 @@
 - name: print name
   hosts: front
   connection: local
+   
   vars_prompt:
     - name: username
       prompt: please enter your username
@@ -12,4 +13,5 @@
     - name: print username and password
       ansible.builtin.debug:
         msg: " Hello username is {{username}} and password is {{password}}"
+        msg: " Hello username is {{course}} and password is {{duration}}"
         
