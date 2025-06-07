@@ -1,0 +1,5 @@
+- name: ping the server
+  host: local
+  tasks:
+   - name: ping the server
+     ansibile.builtin.ping:
