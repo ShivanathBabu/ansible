@@ -13,5 +13,5 @@
     - name: print username and password
       ansible.builtin.debug:
         msg: " Hello username is {{username}} and password is {{password}}"
-        msg: " Hello username is {{course}} and password is {{duration}}"
+        
         
