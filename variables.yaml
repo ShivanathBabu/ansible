@@ -4,9 +4,8 @@
     course: devscops-84s
     duration: 3months
     trainer: sivakumar
-  vars_file:
-  - course.yaml
+
   tasks:
     - name: print varaibales
       ansible.builtin.debug:
-        msg: "Hello {{course}}, course duration {{duration}}, trainer is {{trainer}} amount is {{course ammount}}, feature is {{feature}}"
+        msg: "Hello {{course}}, course duration {{duration}}, trainer is {{trainer}} "
