@@ -7,7 +7,7 @@ keyed_groups:
   seperator: "_"
 filters:
   tag:name: frontend
-  instance-state-name: runing
+  instance-state-name: running
 hostnames:
 - private-ip-address
 compose:
