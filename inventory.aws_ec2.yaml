@@ -1,0 +1,14 @@
+plugin: amazon.awz.awz_ec2
+regions:
+- us-east-1
+keyed_groups:
+- key: tags.name
+  prefix: "dynamic"
+  seperator: "_"
+filters:
+  tag:name: frontend
+  instance-state-name: runing
+hostnames:
+- private-ip-address
+compose:
+  ansible_host: private_ip_address
