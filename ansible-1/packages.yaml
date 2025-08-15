@@ -2,9 +2,9 @@
   hosts: frontend
   tasks:
     - name: installing required packages
-      ansible.builtin.packages:
+      ansible.builtin.package:
         name: "{{item}}"
-        state: installed
+        state: present
       loop:
       - mysql
       - zip
