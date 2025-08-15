@@ -1,6 +1,7 @@
-- name: ping server
-  hosts: frontend
-
+- name: Ping local machine
+  hosts: local
+  connection: local
+  gather_facts: no
   tasks:
-    - name: ping the server
+    - name: Ping the server
       ansible.builtin.ping:
