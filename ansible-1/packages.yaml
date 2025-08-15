@@ -1,7 +1,7 @@
 - name: install packages
   hosts: frontend
   tasks:
-    - name: installing reuired packages
+    - name: installing required packages
       ansible.builtin.packages:
         name: "{{items}}"
         state: installed
