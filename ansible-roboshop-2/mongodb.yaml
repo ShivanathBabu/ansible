@@ -26,7 +26,7 @@
 
     - name: restart service
       ansible.builtin.service:
-        name: mongodb
+        name: mongod
         state: restarted
 
         # mongo installation  1. download repo , install start enabled service, replace allow connection, restart 
