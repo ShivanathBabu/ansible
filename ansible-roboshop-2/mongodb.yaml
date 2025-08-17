@@ -14,7 +14,7 @@
 
     - name: start and enable
       ansible.builtin.service:
-        name: mongodb
+        name: mongod
         state: started
         enabled: yes
 
@@ -28,3 +28,5 @@
       ansible.builtin.service:
         name: mongodb
         state: restarted
+
+        # mongo installation  1. download repo , install start enabled service, replace allow connection, restart 
