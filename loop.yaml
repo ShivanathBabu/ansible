@@ -5,9 +5,9 @@
     - name: install packages
       ansible.builtin.package:
         name: "{{item}}"
-        state: present
+        state: "{{item.state}}"
 
       loop:
-      - mysql
-      - nginx
-      - zip
+      - {name: 'mysql', state: 'present'}
+      - {name: 'nginx', state: 'absent'}
+      - {name: 'zip', state: 'absent'}
