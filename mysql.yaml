@@ -1,0 +1,13 @@
+- name: install mysql
+  hosts: frontend
+  tasks:
+    - name: installing database
+      ansible.builtin.dnf:
+        name: mysql
+        state: present
+    
+    - name: start and enable service
+      ansible.builtin.service:
+        name: mysql
+        state: started
+        enable: yes
