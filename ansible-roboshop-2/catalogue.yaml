@@ -2,7 +2,6 @@
   hosts: catalogue
   tasks:
   - name: disable nodejs
-    ansible.builtin.dnf:
       name: disable default nodejs
       ansible.builtin.command: dnf module disable nodejs -y
 
