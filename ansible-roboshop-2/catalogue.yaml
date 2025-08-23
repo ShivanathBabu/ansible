@@ -1,5 +1,6 @@
 - name: catalogue
   hosts: catalogue
+  become: yes
   tasks:
   - name: disable nodejs
     ansible.builtin.command: dnf module disable nodejs -y
