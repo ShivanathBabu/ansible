@@ -63,7 +63,7 @@
       state: present
 
   - name: check product loaded or not
-    ansible.builtin.command: mongosh --host mongodb.daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    ansible.builtin.command: mongosh --host mongodb.blackweb.agency --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
   - name: load products
