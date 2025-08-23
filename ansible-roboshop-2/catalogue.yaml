@@ -2,8 +2,7 @@
   hosts: catalogue
   tasks:
   - name: disable nodejs
-      name: disable default nodejs
-      ansible.builtin.command: dnf module disable nodejs -y
+    ansible.builtin.command: dnf module disable nodejs -y
 
   - name: install nodejs
     ansible.builtin.dnf:
