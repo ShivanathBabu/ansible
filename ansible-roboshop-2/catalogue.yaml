@@ -65,7 +65,7 @@
       name: mongodb-mongosh
       state: present
 
-  - name: check product loaded or not
+  - name: check products loaded or not
     ansible.builtin.command: mongosh --host mongodb.blackweb.agency --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
@@ -76,4 +76,5 @@
   - name: load products
     ansible.builtin.shell: mongosh --host mongodb.blackweb.agency < /app/db/master-data.js
     when: catalogue_output.stdout | int < 0
+  
 
