@@ -5,6 +5,9 @@
   - name: disable nodejs
     ansible.builtin.command: dnf module disable nodejs -y
 
+  - name: enable nodejs:20
+    ansible.builtin.command: dnf module enable nodejs:20 -y
+
   - name: install nodejs
     ansible.builtin.dnf:
       name: nodejs
@@ -46,7 +49,7 @@
     ansible.builtin.systemd_service:
       daemon_reload: true
 
-  - name: start and enable daemon reload
+  - name: start and enable service
     ansible.builtin.service:
       name: catalogue
       state: started
@@ -67,6 +70,6 @@
     register: catalogue_output
 
   - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.daws84s.site < /app/db/master-data.js
+    ansible.builtin.shell: mongosh --host mongodb.blackweb.agency < /app/db/master-data.js
     when: catalogue_output.stdout | int < 0
 
