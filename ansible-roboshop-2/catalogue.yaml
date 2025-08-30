@@ -65,16 +65,22 @@
       name: mongodb-mongosh
       state: present
 
-  - name: check products loaded or not
-    ansible.builtin.command: mongosh --host mongodb.blackweb.agency --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
-    register: catalogue_output
+  - name: load product data
+    community.mongodb.mongodb_shell:
+      file: "/app/db/master-data.js"
+      idempotent: yes
+      login_host: mongodb.blackweb.agency 
 
-  - name: print catalogue output
-    ansible.builtin.debug:
-      msg: "{{ catalogue_output }}"
+  # - name: check products loaded or not
+  #   ansible.builtin.command: mongosh --host mongodb.blackweb.agency --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  #   register: catalogue_output
 
-  - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.blackweb.agency < /app/db/master-data.js
-    when: catalogue_output.stdout | int < 0
+  # - name: print catalogue output
+  #   ansible.builtin.debug:
+  #     msg: "{{ catalogue_output }}"
+
+  # - name: load products
+  #   ansible.builtin.shell: mongosh --host mongodb.blackweb.agency < /app/db/master-data.js
+  #   when: catalogue_output.stdout | int < 0
   
 
