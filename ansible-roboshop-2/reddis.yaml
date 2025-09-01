@@ -13,11 +13,7 @@
       name: redis
       state: present
 
-  - name: enable service
-    ansible.builtin.service:
-      name: redis
-      state: started
-      enabled: yes
+ 
 
   - name: change 0.0.0.0
     ansible.builtin.replace:
