@@ -14,7 +14,7 @@
   - name: enable service
     ansible.builtin.service:
       name: nodejs
-      state: present
+      state: started
       enabled: yes
 
   - name: create directory
