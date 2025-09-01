@@ -15,6 +15,7 @@
     ansible.builtin.service:
       name: nodejs
       state: present
+      enabled: yes
 
   - name: create directory
     ansible.builtin.file:
