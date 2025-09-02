@@ -30,7 +30,7 @@
       name: roboshop
       shell: /sbin/nologin
       system: true
-      path: /app
+      home: /app
       
 
   - name: download code
