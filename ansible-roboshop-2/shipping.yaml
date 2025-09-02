@@ -1,0 +1,99 @@
+- name: shipping
+  hosts: shipping
+  become: yes
+  tasks:
+  - name: install maven
+    ansible.builtin.dnf:
+      name: "{{items}}"
+      state: present
+    loop:
+    - maven
+    - mysql
+
+  - name: install pymysql and cryptography
+    ansible.builtin.pip:
+      name: "{{item}}"
+      executable: pip3.9
+    loop:
+    - cryptography
+    - PyMySQL
+    
+
+  - name: create directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+
+  - name: create system user
+    ansible.builtin.user:
+      name: roboshop
+      shell: /sbin/nologin
+      path: /app
+      system: true
+
+  - name: download code
+    ansible.builtin.get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+      path: /tmp/shipping.zip
+
+  - name: unarchive file
+    ansible.builtin.unarchive:
+      src: /tmp/shipping.zip
+      dest: /app
+      remote_src: yes
+
+  - name: install dependencies
+    ansible.builtin.command: mvn clean package
+    args:
+      chdir: /app
+
+#If your build creates shipping-1.1.jar, systemd won’t find it unless you update the service file so there fore we change file name.
+
+  - name: rename jar file
+    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+    args:
+      chdir: /app
+
+  - name: copy service file
+    ansible.builtin.copy:
+      src: shipping.service
+      dest: /etc/systemd/system/shipping.service
+
+  - name: daemon_reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: enable and start service
+    ansible.builtin.service:
+      name: shipping
+      state: started
+      enabled: yes
+
+  - name: import data
+    tags:
+    - import
+    community.mysql.mysql_db: # check you can connect to the 
+      name: all # all schema file import 
+      login_user: root
+      login_password: Roboshop@1
+      login_host: mysql.blackweb.agency
+      state: import
+      target: "{{item}}"
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql
+    - /app/db/master-data.sql
+
+  - name: restart shipping
+    tags: 
+    - import
+    ansible.builtin.service:
+      name: shipping
+      state: restarted
+    
+
+
+
+
+ 
