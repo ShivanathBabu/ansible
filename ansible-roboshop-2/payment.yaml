@@ -4,8 +4,12 @@
   tasks:
   - name: python3 install
     ansible.builtin.dnf:
-      name: python3 gcc python3-devel
+      name: {{ item }}
       state: present
+    loop:
+    - python3
+    - gcc
+    - python3-devel
 
   - name: system user
     ansible.builtin.user:
