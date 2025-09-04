@@ -12,7 +12,7 @@
     ansible.builtin.dnf:
       name: nginx
       state: present
-      enabled: yes
+     
 
   - name: start and enable service
     ansible.builtin.service:
