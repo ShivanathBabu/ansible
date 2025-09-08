@@ -1,4 +1,4 @@
-- name: app-setup
+- name: app setup
   include_role:
     name: common
     tasks_from: app-setup
@@ -7,30 +7,6 @@
   include_role:
     name: common
     tasks_from: nodejs
-
-
-- name: create system user
-  ansible.builtin.user:
-    name: roboshop
-    shell: /sbin/nologin
-    system: true
-    home: /app
-
-- name: download catalogue code
-  ansible.builtin.get_url:
-    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
-    dest: /tmp/catalogue.zip
-
-- name: extract catalogue code
-  ansible.builtin.unarchive:
-    src: /tmp/catalogue.zip
-    dest: /app
-    remote_src: yes
-
-- name: install dependencies
-  community.general.npm:
-    path: /app
-
 
 
 - name: copy mongodb repo
@@ -57,7 +33,7 @@
   ansible.builtin.shell: mongosh --host mongodb.blackweb.agency < /app/db/master-data.js
   when: catalogue_output.stdout | int < 0
 
-- name: app
+- name: systemd setup
   include_role:
     name: common
     tasks: systemd.yaml
