@@ -1,0 +1,3 @@
+CART_HOST: cart.blackweb.agency
+USER_HOST: user.blackweb.agency
+RABBIT_HOST: rabbitmq.blackweb.agency
