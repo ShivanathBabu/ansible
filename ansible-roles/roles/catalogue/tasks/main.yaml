@@ -24,6 +24,8 @@
 - name: check products loaded or not
   ansible.builtin.command: mongosh --host mongodb.blackweb.agency --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
+  # ignore_error: true
+  # ignore_unreachable: true  ignore error
 
 - name: print catalogue output
   ansible.builtin.debug:
@@ -37,3 +39,10 @@
   include_role:
     name: common
     tasks_from: systemd.yaml
+
+- name: deployement
+  tags:
+  - deployement
+  import_role:
+    name: common
+    tasks_from: deployement
